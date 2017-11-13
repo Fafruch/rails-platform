@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     get 'sign_up', to: 'devise/registrations#new'
   end
 
+  resources :users
+
   root to: 'home#index'
 end

@@ -1,0 +1,16 @@
+<div class="container">
+  <h2>User:</h2>
+
+  ID: <%= @user.id %><br>
+  Password: <%= @user.encrypted_password %><br>
+  <br>
+  First name: <%= @user.first_name %><br>
+  Last name: <%= @user.last_name %><br>
+  <br>
+  E-mail: <%= @user.email %><br>
+  Phone number: <%= @user.phone_number %><br>
+  <br>
+
+  <%= link_to 'Edit your profile', edit_user_path , class: 'btn btn-primary'%>
+
+</div>
