@@ -1,4 +1,4 @@
-require '/Users/Fafruch/RubymineProjects/selleo-test-project/selleo-app/lib/subdomain.rb'
+require_relative '../lib/subdomain'
 
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
