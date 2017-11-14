@@ -10,13 +10,8 @@
         <%= f.label 'E-mail' %><br>
         <%= f.text_field :email, class: 'form-control' %><br>
         <%= f.label 'Phone number' %><br>
-        <%= f.text_field :email, class: 'form-control' %><br>
+        <%= f.text_field :phone_number, class: 'form-control' %><br>
       </div>
-
-      <% if session[:error] %>
-          <p> Drogi użytkowniku, ogarnij się </p>
-      <% end %>
-      <br>
 
       <div class="actions">
         <%= f.submit 'Confirm changes', class: 'btn btn-primary' %>

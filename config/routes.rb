@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     get 'sign_up', to: 'devise/registrations#new'
   end
 
-  resources :users
+  resources :users, only: [:show, :edit, :update]
 
   root to: 'home#index'
 end
