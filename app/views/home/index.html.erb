@@ -1,15 +1,8 @@
 <div class="container-fluid">
-  <div class="nav navbar justify-content-end">
-    <% unless user_signed_in? %>
-      <span class="p-1">
-        <%= link_to "Log in", sign_in_path %>
-      </span>
-      <span class="p-1">
-        <%= link_to "Sign up", sign_up_path %>
-      </span>
-    <% end%>
-  </div>
   <h1 class="text-center">
     Hello
   </h1>
+  <% if is_current_user_an_admin? %>
+    Siemanero siemaneczko adminska czapo!
+  <% end %>
 </div>
