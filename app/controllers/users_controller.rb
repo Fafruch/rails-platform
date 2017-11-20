@@ -1,6 +1,7 @@
-class UsersController < ApplicationController
-  before_action :authenticate_user!
-  protect_from_forgery prepend: true
+class UsersController < AdminController
+  def index
+    @users = User.all
+  end
 
   def new
     @user = User.new
