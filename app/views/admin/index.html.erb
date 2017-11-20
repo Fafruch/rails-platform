@@ -1,0 +1,20 @@
+<div class="container">
+  <br>
+  Hello admin!
+  You can go to the following sites:
+  <br>
+  <br>
+
+  <ul class="list-group">
+    <%= link_to organizations_path do %>
+      <li class="list-group-item">
+        Organizations<br>
+      </li>
+      <% end %>
+    <%= link_to users_path do %>
+        <li class="list-group-item">
+          Users<br>
+        </li>
+    <% end %>
+  </ul>
+</div>

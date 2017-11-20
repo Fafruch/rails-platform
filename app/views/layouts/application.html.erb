@@ -10,12 +10,17 @@
 
   <body>
 
-    <% unless current_page?(sign_in_path) || current_page?(sign_up_path) || current_page?(new_user_session_path) %>
+    <% unless current_page?(sign_in_path) || current_page?(sign_up_path) || request.fullpath == new_user_session_path %>
       <% if user_signed_in? %>
           <div class="nav navbar justify-content-end bg-dark">
             <span class="p-1 text-white">
               Hello, <%= current_user.first_name %>
             </span>
+            <% if current_user.admin? %>
+                <span class="p-1 text-white">
+                   <%= link_to 'Admin section', admin_path, class: 'btn btn-info' %>
+                </span>
+            <% end %>
            <span class="p-1">
               <%= link_to 'Log out', sign_out_path, class: 'btn btn-secondary' %>
             </span>
@@ -42,9 +47,11 @@
 
     <% if flash %>
         <% flash.each do |msg_type, msg| %>
-            <div class="alert alert-<%= msg_type %> m-0">
-              <%= msg %>
-            </div>
+            <% if msg != notice && msg != alert %>
+              <div class="alert alert-<%= msg_type %> m-0">
+                <%= msg %>
+              </div>
+            <% end %>
         <% end %>
     <% end %>
 
