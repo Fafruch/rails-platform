@@ -21,7 +21,7 @@ class UsersController < AdminController
 
   def destroy
     if @user.is_same_as(current_user)
-      flash[:warning] = 'Nie usuwaj siebie! ;)'
+      flash[:warning] = "Don't remove yourself! ;)"
       render :show
     else
       @user.destroy

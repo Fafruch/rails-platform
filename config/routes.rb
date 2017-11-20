@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get 'admin', to: 'admin#index'
   scope 'admin' do
     resources :users, except: :new
-    resources :organizations, only: :index
+    resources :organizations
   end
 
   resources :organizations, only: :show

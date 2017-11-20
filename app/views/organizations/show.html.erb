@@ -1,5 +1,10 @@
-<% if @organization %>
-    Welcome on a <strong><%= @organization.name %></strong> organization page!
-<% else %>
-  There is no such organization! Sorry.
-<% end %>
+<div class="text-center">
+  <br>
+  <% if @organization %>
+      <h4>
+        Welcome on a <strong><%= @organization.name %></strong> organization page!
+      </h4>
+  <% else %>
+      There is no such organization! Sorry.
+  <% end %>
+</div>
