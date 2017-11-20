@@ -10,6 +10,9 @@
   E-mail: <%= @user.email %><br>
   Phone number: <%= @user.phone_number %><br>
   <br>
+  Role: <%= @user.role %><br>
+  <br>
+
   <% if @user.organizations.length == 0 %>
     User belongs to no organizations<br>
   <% else %>

@@ -21,6 +21,9 @@
         <%= f.text_field :email, class: 'form-control' %><br>
         <%= f.label 'Phone number' %><br>
         <%= f.text_field :phone_number, class: 'form-control' %><br>
+        <%= f.label 'Role' %><br>
+        <%= f.select :role, [%w[Admin admin], %w[User user]], {}, class: 'form-control', disabled: is_it_myself? %><br>
+        <br>
       </div>
 
       <div class="actions">
