@@ -17,7 +17,6 @@ class OrganizationsController < ApplicationController
     if @organization.save
       redirect_to action: 'index'
     else
-      flash[:error] = 'There was a problem with creating an organization. Please try again'
       render :new
     end
   end
@@ -26,7 +25,7 @@ class OrganizationsController < ApplicationController
     if @organization.update_attributes(organization_params)
       redirect_to action: 'index'
     else
-      render 'edit'
+      render :edit
     end
   end
 
