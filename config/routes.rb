@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :organizations, only: :show
 
   constraints Subdomain do
-    match '', to: 'organizations#show_by_subdomain', via: [:get]
+    match '', to: 'organizations#show_on_subdomain', via: [:get]
   end
 
   root to: 'home#index'
