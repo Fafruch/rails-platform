@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     get 'sign_up', to: 'devise/registrations#new'
   end
 
-  resources :users, only: %i[index show edit update]
+  resources :users
   resources :organizations, only: %i[index show]
 
   constraints Subdomain do

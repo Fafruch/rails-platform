@@ -9,15 +9,8 @@
   </head>
 
   <body>
-    <% if notice %>
-      <div class="alert alert-warning m-0"><%= notice %></div>
-    <% end %>
 
-    <% if alert %>
-      <div class="alert alert-danger m-0"><%= alert %></div>
-    <% end %>
-
-    <% unless current_page?(sign_in_path) or current_page?(sign_up_path) %>
+    <% unless current_page?(sign_in_path) || current_page?(sign_up_path) || current_page?(new_user_session_path) %>
       <% if user_signed_in? %>
           <div class="nav navbar justify-content-end bg-dark">
             <span class="p-1 text-white">
@@ -37,6 +30,22 @@
             </span>
           </div>
       <%end%>
+    <% end %>
+
+    <% if notice %>
+        <div class="alert alert-warning m-0"><%= notice %></div>
+    <% end %>
+
+    <% if alert %>
+        <div class="alert alert-danger m-0"><%= alert %></div>
+    <% end %>
+
+    <% if flash %>
+        <% flash.each do |msg_type, msg| %>
+            <div class="alert alert-<%= msg_type %> m-0">
+              <%= msg %>
+            </div>
+        <% end %>
     <% end %>
 
     <%= yield %>

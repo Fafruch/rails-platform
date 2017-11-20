@@ -1,4 +1,8 @@
 class UsersController < AdminController
+  include UsersHelper
+
+  before_action :find_user, only: %i[show edit update destroy]
+
   def index
     @users = User.all
   end
@@ -7,17 +11,7 @@ class UsersController < AdminController
     @user = User.new
   end
 
-  def show
-    @user = User.find(params[:id])
-  end
-
-  def edit
-    @user = User.find(params[:id])
-  end
-
   def update
-    @user = User.find(params[:id])
-
     if @user.update_attributes(user_params)
       redirect_to @user
     else
@@ -25,9 +19,23 @@ class UsersController < AdminController
     end
   end
 
+  def destroy
+    if @user.is_same_as(current_user)
+      flash[:warning] = 'Nie usuwaj siebie! ;)'
+      render :show
+    else
+      @user.destroy
+      render :index
+    end
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:email, :phone_number, :first_name, :last_name, :role)
+  end
+
+  def find_user
+    @user = User.find(params[:id])
   end
 end

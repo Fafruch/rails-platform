@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :authenticate_admin, only: [:index]
+  skip_before_action :authenticate_user!, only: [:show_by_subdomain]
 
   def index
     @organizations = Organization.all
@@ -9,8 +10,9 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
   end
 
-  def show_by_domain
+  def show_by_subdomain
     @organization = Organization.find_by subdomain: request.subdomain
+    render :show
   end
 
   private
