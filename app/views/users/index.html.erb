@@ -2,11 +2,9 @@
   <h2>Users</h2>
   <ul class="list-group">
     <% @users.each do |user| %>
-      <%= link_to user_path(user) do %>
         <li class="list-group-item">
-          <%= user.first_name %> <%= user.last_name %>
+          <%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %>
         </li>
-      <% end %>
     <% end %>
   </ul>
   <br>
