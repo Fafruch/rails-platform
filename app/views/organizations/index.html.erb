@@ -4,12 +4,17 @@
     <% @organizations.each do |organization| %>
 
             <li class="list-group-item">
-              <%= organization.name %>
+              <strong>
+                <%= organization.name %>
+              </strong>
               <ul class="list-group">
-                <% organization.users.each do |user| %>
+                <br />
+                Members:
+                <br />
+                <% organization.users.each.with_index do |user, index| %>
                     <%= link_to user_path(user) do %>
                       <li class="list-group-item">
-                        <%= user.first_name %>
+                        <%= index + 1 %>. <%= user.first_name %> <%= user.last_name %>
                       </li>
                   <% end %>
                 <% end %>
