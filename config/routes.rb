@@ -15,10 +15,10 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: %i[index show edit update]
-  resources :organizations, only: %i[index]
+  resources :organizations, only: %i[index show]
 
   constraints Subdomain do
-    match '', to: 'organizations#show', via: [:get]
+    match '', to: 'organizations#show_by_subdomain', via: [:get]
   end
 
   root to: 'home#index'

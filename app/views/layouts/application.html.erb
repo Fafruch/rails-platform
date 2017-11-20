@@ -20,18 +20,21 @@
     <% unless current_page?(sign_in_path) or current_page?(sign_up_path) %>
       <% if user_signed_in? %>
           <div class="nav navbar justify-content-end bg-dark">
-       <span class="p-1">
-          <%= link_to 'Log out', sign_out_path, class: 'btn btn-secondary' %>
-        </span>
+            <span class="p-1 text-white">
+              Hello, <%= current_user.first_name %>
+            </span>
+           <span class="p-1">
+              <%= link_to 'Log out', sign_out_path, class: 'btn btn-secondary' %>
+            </span>
           </div>
       <% else %>
           <div class="nav navbar justify-content-end">
-        <span class="p-1">
-          <%= link_to 'Sign up', sign_up_path, class: 'btn btn-primary' %>
-        </span>
             <span class="p-1">
-          <%= link_to 'Log in', sign_in_path, class: 'btn btn-secondary' %>
-        </span>
+              <%= link_to 'Sign up', sign_up_path, class: 'btn btn-primary' %>
+            </span>
+            <span class="p-1">
+              <%= link_to 'Log in', sign_in_path, class: 'btn btn-secondary' %>
+            </span>
           </div>
       <%end%>
     <% end %>
