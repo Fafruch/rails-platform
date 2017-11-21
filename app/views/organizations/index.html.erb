@@ -6,16 +6,21 @@
           <h4>
             <%= organization.name %>
           </h4>
-          <ul class="list-group">
-            <br/>
-            Members:
-            <br/>
-            <% organization.users.each.with_index do |user, index| %>
-                <li class="list-group-item">
-                  <%= index + 1 %>.  <%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %>
-                </li>
-            <% end %>
-          </ul>
+
+          <% if organization.users.length == 0 %>
+              This organization has no members.<br>
+          <% else %>
+              <br>
+                Members:
+              <br>
+              <ul class="list-group">
+                <% organization.users.each.with_index do |user, index| %>
+                    <li class="list-group-item">
+                      <%= index + 1 %>.  <%= user.first_name %> <%= user.last_name %>
+                    </li>
+                <% end %>
+              </ul>
+          <% end %>
 
           <br>
           <%= link_to 'Show organization site', organization_path(organization), class: 'btn btn-outline-success' %>

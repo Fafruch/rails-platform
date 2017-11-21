@@ -1,9 +1,9 @@
 <div class="container">
   <h2>Users</h2>
   <ul class="list-group">
-    <% @users.each do |user| %>
+    <% @users.each.with_index do |user, index| %>
         <li class="list-group-item">
-          <%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %>
+          <%= index + 1 %>. <%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %>
         </li>
     <% end %>
   </ul>

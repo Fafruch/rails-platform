@@ -31,5 +31,6 @@
   <% unless @user.is_same_as(current_user) %>
     <%= link_to 'Delete user', user_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
   <% end %>
+  <%= link_to 'Go back to all users', users_path, class: 'btn btn-secondary' %>
 
 </div>
