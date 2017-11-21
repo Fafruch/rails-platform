@@ -29,21 +29,20 @@
       <% if @user.organizations.length != 0 %>
           Organizations:<br>
           <ul class="list-group">
-            <% @user.organizations.each do |organization| %>
+            <% @user_organizations.each do |user_organization| %>
                 <li class="list-group-item d-flex justify-content-between">
                   <span>
-                  <%= organization.name %>
+                  <%= user_organization.organization.name %>
                 </span>
                   <span>
-                    <%# TO DO:
-                  <%# <%= link_to 'Remove user from this organization', { controller: :user_organizations, action: :destroy, user_id: @user.id, id: 111 }, class: 'btn btn-outline-danger' %>
+                  <%= link_to 'Remove user from this organization', { controller: :user_organizations, action: :destroy, user_id: @user.id, id: user_organization.id }, method: :delete, class: 'btn btn-outline-danger' %>
                 </span>
                 </li>
             <% end %>
           </ul>
       <% end %>
       <br>
-      <%= link_to 'Add user to organiztion', { controller: :user_organizations, action: :new, user_id: @user.id }, class: 'btn btn-outline-primary' %>
+      <%= link_to 'Add user to organization', { controller: :user_organizations, action: :new, user_id: @user.id }, class: 'btn btn-outline-primary' %>
       <br>
       <br>
       <br>
