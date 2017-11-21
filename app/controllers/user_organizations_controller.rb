@@ -3,8 +3,8 @@ class UserOrganizationsController < ApplicationController
 
   def new
     @user_organization = UserOrganization.new
-    @not_users_organizations = Organization.all - @user.organizations
-    @not_users_organizations_hash = Hash[(Organization.all - @user.organizations).map { |organization| [organization.name, organization.id] }]
+    @not_user_organizations = Organization.all - @user.organizations
+    @not_user_organizations_hash = Hash[@not_user_organizations.map { |organization| [organization.name, organization.id] }]
   end
 
   def create
