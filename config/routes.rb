@@ -18,8 +18,11 @@ Rails.application.routes.draw do
   scope 'admin' do
     resources :users, except: :new
     resources :organizations
-  end
 
+    resources :users do
+      resources :user_organizations
+    end
+  end
   resources :organizations, only: :show
 
   constraints Subdomain do

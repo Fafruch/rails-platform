@@ -1,9 +1,9 @@
 <% if @user.errors.messages.present? %>
     <div class="alert alert-danger">
       <ul>
-       <% @user.errors.full_messages.each do |message| %>
-         <li><%= message %></li>
-       <% end %>
+        <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
 <% end %>
@@ -22,9 +22,32 @@
         <%= f.label 'Phone number' %><br>
         <%= f.text_field :phone_number, class: 'form-control' %><br>
         <%= f.label 'Role' %><br>
-        <%= f.select :role, [%w[Admin admin], %w[User user]], {}, class: 'form-control', disabled: @user.is_same_as(current_user) %><br>
+        <%= f.select :role, [%w[Admin admin], %w[User user]], {}, class: 'form-control', disabled: @user.is_same_as(current_user) %>
         <br>
       </div>
+
+      <% if @user.organizations.length != 0 %>
+          Organizations:<br>
+          <ul class="list-group">
+            <% @user.organizations.each do |organization| %>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>
+                  <%= organization.name %>
+                </span>
+                  <span>
+                    <%# TO DO:
+                  <%# <%= link_to 'Remove user from this organization', { controller: :user_organizations, action: :destroy, user_id: @user.id, id: 111 }, class: 'btn btn-outline-danger' %>
+                </span>
+                </li>
+            <% end %>
+          </ul>
+      <% end %>
+      <br>
+      <%= link_to 'Add user to organiztion', { controller: :user_organizations, action: :new, user_id: @user.id }, class: 'btn btn-outline-primary' %>
+      <br>
+      <br>
+      <br>
+
 
       <div class="actions">
         <%= f.submit 'Confirm changes', class: 'btn btn-primary' %>
