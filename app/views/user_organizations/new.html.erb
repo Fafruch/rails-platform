@@ -1,12 +1,4 @@
-<% if @user_organization.errors.messages.present? %>
-    <div class="alert alert-danger">
-      <ul>
-        <% @user_organization.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-<% end %>
+<%= render 'shared/error_messages', object: @user_organization %>
 
 <div class="container">
   <h2>Add user to organization</h2>

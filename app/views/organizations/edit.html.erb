@@ -1,12 +1,4 @@
-<% if @organization.errors.messages.present? %>
-    <div class="alert alert-danger">
-      <ul>
-        <% @organization.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-<% end %>
+<%= render 'shared/error_messages', object: @organization %>
 
 <div class="container">
   <h2>Edit organization</h2>
