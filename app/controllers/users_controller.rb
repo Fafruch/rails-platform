@@ -11,10 +11,6 @@ class UsersController < AdminController
     @user = User.new
   end
 
-  def edit
-    @user_organizations = UserOrganization.where(user_id: @user.id)
-  end
-
   def update
     if @user.update_attributes(user_params)
       redirect_to @user
