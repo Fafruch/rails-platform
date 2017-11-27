@@ -18,7 +18,7 @@ class UserOrganizationsController < ApplicationController
   end
 
   def destroy
-    @user_organization = UserOrganization.find(params[:id])
+    @user_organization = UserOrganization.find_by(user_id: params[:user_id], organization_id: params[:id])
     @user_organization.destroy
 
     redirect_to edit_user_path(@user)
