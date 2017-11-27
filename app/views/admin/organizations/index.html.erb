@@ -1,0 +1,43 @@
+<div class="container">
+  <h2>Organizations</h2>
+  <ul class="list-group">
+    <% @organizations.each do |organization| %>
+        <li class="list-group-item">
+          <h4>
+            <%= organization.name %>
+          </h4>
+
+          <% if organization.users.length == 0 %>
+              This organization has no members.<br>
+          <% else %>
+              <br>
+                Members:
+              <br>
+              <ul class="list-group">
+                <% organization.users.each.with_index do |user, index| %>
+                    <li class="list-group-item">
+                      <%= index + 1 %>.  <%= user.first_name %> <%= user.last_name %>
+                    </li>
+                <% end %>
+              </ul>
+          <% end %>
+
+          <br>
+          <%= link_to 'Show organization site', admin_organization_path(organization), class: 'btn btn-outline-success' %>
+          <%= link_to 'Edit organization', edit_admin_organization_path(organization), class: 'btn btn-outline-primary' %>
+          <%= link_to 'Delete organization', admin_organization_path(organization), method: :delete, class: 'btn btn-outline-danger' %>
+
+        </li>
+    <% end %>
+  </ul>
+  <br>
+
+  <%= link_to 'New organization', new_admin_organization_path, class: 'btn btn-primary' %>
+
+  <br>
+  <br>
+  <br>
+
+  <%= link_to 'Go back to admin panel', admin_path, class: 'btn btn-secondary' %>
+
+</div>

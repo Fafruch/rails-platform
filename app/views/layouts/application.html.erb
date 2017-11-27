@@ -16,7 +16,7 @@
             <span class="p-1 text-white">
               Hello, <%= current_user.first_name %>
             </span>
-            <% if current_user.admin? %>
+            <% if current_user.global_admin? %>
                 <span class="p-1 text-white">
                    <%= link_to 'Admin section', admin_path, class: 'btn btn-light' %>
                 </span>

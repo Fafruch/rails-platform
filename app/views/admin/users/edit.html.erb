@@ -18,26 +18,7 @@
         <br>
       </div>
 
-      <% if @user.organizations.length != 0 %>
-          Organizations:<br>
-          <ul class="list-group">
-            <% @user.organizations.each do |user_organization| %>
-                <li class="list-group-item d-flex justify-content-between">
-                  <span>
-                  <%= user_organization.name %>
-                </span>
-                  <span>
-                  <%= link_to 'Remove user from this organization', { controller: :user_organizations, action: :destroy, user_id: @user.id, id: user_organization.id }, method: :delete, class: 'btn btn-outline-danger' %>
-                </span>
-                </li>
-            <% end %>
-          </ul>
-      <% end %>
-      <br>
-      <%= link_to 'Add user to organization', { controller: :user_organizations, action: :new, user_id: @user.id }, class: 'btn btn-outline-primary' %>
-      <br>
-      <br>
-      <br>
+      <%= link_to 'Remove user from this organization', { controller: :user_organizations, action: :destroy, user_id: @user.id, id: user_organization.id }, method: :delete, class: 'btn btn-outline-danger' %>
 
 
       <div class="actions">

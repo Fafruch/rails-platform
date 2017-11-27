@@ -1,0 +1,20 @@
+<%= render 'shared/error_messages', object: @organization %>
+
+<div class="container">
+  <h2>Edit organization</h2>
+
+  <%= form_for @organization, url: admin_organization_path, html: { method: :put } do |f| %>
+      <div class="field">
+        <%= f.label 'Name' %><br>
+        <%= f.text_field :name, class: 'form-control' %><br>
+        <%= f.label 'Subdomain' %><br>
+        <%= f.text_field :subdomain, class: 'form-control' %><br>
+        <br>
+      </div>
+
+      <div class="actions">
+        <%= f.submit 'Confirm changes', class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', admin_organizations_path, class: 'btn btn-secondary' %>
+      </div>
+  <% end %>
+</div>
