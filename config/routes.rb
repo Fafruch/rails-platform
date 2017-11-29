@@ -23,8 +23,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users # for org admin
-  resource :organization, only: %i(edit show) # for org admin
+  # Org admin
+  resources :organizations, only: %i[index show edit update] do
+    resources :user_organizations, path: :users, only: %i[edit update destroy]
+  end
+  resources :users, only: %i[show edit update]
 
   constraints Subdomain do
     match '', to: 'organizations#show_on_subdomain', via: [:get]

@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_many :user_organizations
   has_many :organizations, through: :user_organizations
 
-  enum role: %i[global_admin org_admin user]
+  enum role: %i[global_admin user]
 
   def is_same_as given_user
     id == given_user.id

@@ -13,24 +13,7 @@
   Role: <%= @user.role %><br>
   <br>
 
-  <% if @user.organizations.length == 0 %>
-    User belongs to no organizations<br>
-  <% else %>
-      Organizations:<br>
-      <ul class="list-group">
-        <% @user.organizations.each do |organization| %>
-            <li class="list-group-item">
-              <%= organization.name %>
-            </li>
-        <% end %>
-      </ul>
-  <% end %>
-  <br>
-
-  <%= link_to 'Edit user', edit_admin_user_path , class: 'btn btn-primary'%>
-  <% unless @user.is_same_as(current_user) %>
-    <%= link_to 'Delete user', admin_user_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
-  <% end %>
-  <%= link_to 'Go back to all users', admin_users_path, class: 'btn btn-secondary' %>
+  <%= link_to 'Edit user', edit_user_path(@user.id), class: 'btn btn-outline-info' %>
+  <%= link_to 'Go back to your organizations', organizations_path, class: 'btn btn-secondary' %>
 
 </div>
