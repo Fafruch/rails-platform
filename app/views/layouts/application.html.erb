@@ -13,27 +13,48 @@
     <div class="mb-4">
       <% unless current_page?(sign_in_path) || current_page?(sign_up_path) || request.fullpath == new_user_session_path %>
           <% if user_signed_in? %>
-              <div class="nav navbar justify-content-end bg-dark">
-            <span class="p-1 text-white">
-              Hello, <%= current_user.first_name %>
-            </span>
-                <% if current_user.global_admin? %>
-                <span class="p-1 text-white">
-                   <%= link_to 'Admin section', admin_path, class: 'btn btn-light' %>
+              <div class="nav navbar justify-content-between bg-dark">
+
+                <div>
+                  <%= link_to '/', class: 'btn btn-outline-light' do %>
+                      <%= fa_icon 'home' %>
+                  <% end %>
+
+                  <% unless current_user.global_admin? %>
+                      <%= link_to 'Organizations', organizations_path, class: 'btn btn-outline-light' %>
+                  <% end %>
+
+                  <% if current_user.global_admin? %>
+                      <%= link_to 'Your profile', admin_user_path(current_user), class: 'btn btn-outline-light' %>
+                  <% else %>
+                      <%= link_to 'Your profile', user_path(current_user), class: 'btn btn-outline-light' %>
+                  <% end %>
+                </div>
+
+                <div>
+                  <span class="p-1 text-white">
+                  Hello, <%= current_user.first_name %>
                 </span>
-                <% end %>
-                <span class="p-1">
-              <%= link_to 'Log out', sign_out_path, class: 'btn btn-secondary' %>
-            </span>
+
+                  <% if current_user.global_admin? %>
+                  <span class="p-1 text-white">
+                     <%= link_to 'Admin section', admin_path, class: 'btn btn-light' %>
+                  </span>
+                  <% end %>
+
+                  <span class="p-1">
+                  <%= link_to 'Log out', sign_out_path, class: 'btn btn-secondary' %>
+                </span>
+                </div>
               </div>
           <% else %>
               <div class="nav navbar justify-content-end">
-            <span class="p-1">
-              <%= link_to 'Sign up', sign_up_path, class: 'btn btn-primary' %>
-            </span>
                 <span class="p-1">
-              <%= link_to 'Log in', sign_in_path, class: 'btn btn-secondary' %>
-            </span>
+                  <%= link_to 'Sign up', sign_up_path, class: 'btn btn-primary' %>
+                </span>
+                    <span class="p-1">
+                  <%= link_to 'Log in', sign_in_path, class: 'btn btn-secondary' %>
+                </span>
               </div>
           <%end%>
       <% end %>
