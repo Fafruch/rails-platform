@@ -22,6 +22,8 @@ class UsersController < ApplicationController
   end
 
   def authenticate_org_admin
+    return if @user.id == current_user.id
+
     @showed_user_organizations = UserOrganization.all.where(user_id: @user.id)
     @current_user_organizations = UserOrganization.all.where(user_id: current_user.id)
     @current_user_authorized = false
