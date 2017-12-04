@@ -13,7 +13,7 @@
   Role: <%= @user.role %><br>
   <br>
 
-  <% if @user.organizations.length == 0 %>
+  <% if @user.organizations.empty? %>
     User belongs to no organizations<br>
   <% else %>
       Organizations:<br>

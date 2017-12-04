@@ -7,7 +7,7 @@
             <%= organization.name %>
           </h4>
 
-          <% if organization.users.length == 0 %>
+          <% if organization.users.empty? %>
               This organization has no members.<br>
           <% else %>
               <br>
