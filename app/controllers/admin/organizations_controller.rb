@@ -40,6 +40,6 @@ class Admin::OrganizationsController < Admin::BaseController
   end
 
   def find_organization
-    @organization = Organization.find(params[:id])
+    @organization ||= Organization.find(params[:id])
   end
 end

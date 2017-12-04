@@ -1,5 +1,5 @@
 class UserOrganizationsController < ApplicationController
-  before_action :authenticate_org_admin
+  before_action :authenticate_organization_admin
   before_action :find_user_organization
   before_action :find_user, only: [:edit]
 
@@ -20,15 +20,12 @@ class UserOrganizationsController < ApplicationController
 
   private
 
-  def authenticate_org_admin
-    @current_user_organization = UserOrganization.find_by(user_id: current_user.id, organization_id: params[:organization_id])
-    @is_not_admin_of_current_org = true
+  def authenticate_organization_admin
+    render file: 'public/403.html' unless admin_role_for_organization?
+  end
 
-    if @current_user_organization.present?
-      @is_not_admin_of_current_org = @current_user_organization.member?
-    end
-
-    render file: 'public/403.html' if @is_not_admin_of_current_org
+  def admin_role_for_organization?
+    current_user.user_organizations.exists?(organization_role: 'organization_admin', organization_id: params[:id])
   end
 
   def user_organization_params
@@ -36,10 +33,10 @@ class UserOrganizationsController < ApplicationController
   end
 
   def find_user
-    @user = User.find(params[:id])
+    @user ||= User.find(params[:id])
   end
 
   def find_user_organization
-    @user_organization = UserOrganization.find_by(user_id: params[:id], organization_id: params[:organization_id])
+    @user_organization ||= UserOrganization.find_by(user_id: params[:id], organization_id: params[:organization_id])
   end
 end

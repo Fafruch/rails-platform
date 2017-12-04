@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :find_user
-  before_action :authenticate_org_admin
+  before_action :authenticate_organization_admin
 
   def update
     if @user.update_attributes(user_params)
@@ -18,26 +18,21 @@ class UsersController < ApplicationController
   end
 
   def find_user
-    @user = User.find(params[:id])
+    @user ||= User.find(params[:id])
   end
 
-  def authenticate_org_admin
-    return if @user.id == current_user.id
+  def authenticate_organization_admin
+    return if @user == current_user
 
-    @showed_user_organizations = UserOrganization.all.where(user_id: @user.id)
-    @current_user_organizations = UserOrganization.all.where(user_id: current_user.id)
-    @current_user_authorized = false
+    render file: 'public/403.html' unless organization_admin_of_chosen_user?
+  end
 
-    @current_user_organizations.each do |current_user_organization|
-      @showed_user_organizations.each do |chosen_user_organization|
-        # check if user which we want to show / edit belongs to the same organization and if currently logged user
-        # is admin of this organization
-        next if current_user_organization.organization_id != chosen_user_organization.organization_id || !current_user_organization.org_admin?
-
-        @current_user_authorized = true
-      end
+  def organization_admin_of_chosen_user?
+    @common_organizations = current_user.organizations & @user.organizations
+    @common_organizations.each do |organization|
+      return true if current_user.user_organizations.find_by(organization_id: organization.id).organization_admin?
     end
 
-    render file: 'public/403.html' unless @current_user_authorized
+    false
   end
 end

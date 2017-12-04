@@ -1,12 +1,12 @@
 class OrganizationsController < ApplicationController
-  before_action :authenticate_org_admin, only: %i[edit update]
+  before_action :authenticate_organization_admin, only: %i[edit update]
   before_action :find_organization, only: %i[show edit update]
 
   skip_before_action :authenticate_user!, only: [:show_on_subdomain]
 
   def index
     @organizations = current_user.organizations
-    @user_organizations = UserOrganization.all.where(user_id: current_user.id)
+    @user_organizations = current_user.user_organizations
   end
 
   def update
@@ -25,15 +25,12 @@ class OrganizationsController < ApplicationController
 
   private
 
-  def authenticate_org_admin
-    @is_not_admin_of_current_org = true
-    @current_user_organization = UserOrganization.find_by(user_id: current_user.id, organization_id: params[:id])
+  def authenticate_organization_admin
+    render file: 'public/403.html' unless admin_role_for_organization?
+  end
 
-    if @user_organization.present?
-      @is_not_admin_of_current_org = @current_user_organization.member?
-    end
-
-    render file: 'public/403.html' if @is_not_admin_of_current_org
+  def admin_role_for_organization?
+    current_user.user_organizations.exists?(organization_role: 'organization_admin', organization_id: params[:id])
   end
 
   def organization_params
@@ -41,6 +38,6 @@ class OrganizationsController < ApplicationController
   end
 
   def find_organization
-    @organization = Organization.find(params[:id])
+    @organization ||= Organization.find(params[:id])
   end
 end

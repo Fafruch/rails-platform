@@ -19,7 +19,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def destroy
-    if @user.is_same_as(current_user)
+    if @user == current_user
       flash[:warning] = 'Don\'t remove yourself! ;)'
       render :show
     else
@@ -35,6 +35,6 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def find_user
-    @user = User.find(params[:id])
+    @user ||= User.find(params[:id])
   end
 end

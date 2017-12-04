@@ -6,8 +6,6 @@ class Admin::BaseController < ApplicationController
   private
 
   def authenticate_global_admin
-    unless current_user.global_admin?
-      render file: 'public/403.html'
-    end
+    render file: 'public/403.html' unless current_user.global_admin?
   end
 end

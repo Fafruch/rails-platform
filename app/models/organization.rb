@@ -3,10 +3,7 @@ class Organization < ApplicationRecord
   has_many :users, through: :user_organizations
 
   validates :name,
-            presence: true,
-            uniqueness: true
-
-  validates :subdomain,
+            :subdomain,
             presence: true,
             uniqueness: true
 end
