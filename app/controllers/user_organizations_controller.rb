@@ -25,7 +25,7 @@ class UserOrganizationsController < ApplicationController
   end
 
   def admin_role_for_organization?
-    current_user.user_organizations.exists?(organization_role: 'organization_admin', organization_id: params[:id])
+    current_user.user_organizations.exists?(organization_role: 'organization_admin', organization_id: params[:organization_id])
   end
 
   def user_organization_params
