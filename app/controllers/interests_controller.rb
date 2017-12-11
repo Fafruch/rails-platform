@@ -21,6 +21,7 @@ class InterestsController < ApplicationController
   end
 
   def index
+    @user = User.find(params[:user_id])
     @interests = @user_organization.interests
   end
 
@@ -28,7 +29,7 @@ class InterestsController < ApplicationController
   private
 
   def authenticate_organization_admin
-    render file: 'public/403.html' unless admin_role_for_organization?
+    render file: 'public/403.html' unless admin_role_for_organization? || params[:user_id] != current_user.id
   end
 
   def admin_role_for_organization?

@@ -17,19 +17,21 @@
                     <% organization.users.each.with_index do |user, index| %>
 
                         <li class="list-group-item">
+
                           <div class="row">
                             <div class="col-4 d-flex align-items-center">
                               <strong><%= index + 1 %>. </strong> &nbsp;<%= user.first_name %> <%= user.last_name %>
                             </div>
+
                             <div class="col-8 d-flex justify-content-end">
                               <%= link_to 'Show user', user_path(user.id), class: 'btn btn-outline-primary' %>
                               <%= link_to 'Edit user', edit_user_path(user.id), class: 'btn btn-outline-info ml-3' %>
-                               </div>
+                            </div>
                           </div>
 
                           <br>
-                          <div class="row">
 
+                          <div class="row">
                             <div class="col-12">
 
                               Interests:
@@ -67,6 +69,7 @@
           <br>
 
           <%= link_to 'Show organization site', organization_path(organization), class: 'btn btn-outline-success' %>
+          <%= link_to 'Edit my interests', organization_user_interests_path(organization.id, current_user.id), class: 'btn btn-outline-info' %>
           <% if user_organization.organization_admin? %>
               <%= link_to 'Edit organization interest types', organization_interest_types_path(organization), class: 'btn btn-outline-info' %>
           <% end %>

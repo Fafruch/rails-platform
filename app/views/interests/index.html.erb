@@ -3,8 +3,13 @@
   <ul class="list-group">
 
     <% if @interests.empty? %>
-        This organization has no interests.<br>
+        <% if @user == current_user %>
+            You have no interests in this organization.<br>
+        <% else %>
+            This user has no interests in this organization.<br>
+        <% end %>
     <% else %>
+
         <% @interests.each_with_index do |interest, interest_type_index| %>
             <li class="list-group-item row">
 
