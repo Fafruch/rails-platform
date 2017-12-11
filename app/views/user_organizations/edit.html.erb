@@ -1,0 +1,18 @@
+<%= render 'shared/error_messages', object: @user_organization %>
+
+<div class="container">
+  <h2>Edit user status</h2>
+
+  <%= form_for @user_organization, url: organization_user_organization_path, html: { method: :put } do |f| %>
+      <div class="field">
+        <%= f.label 'Organization role' %><br>
+        <%= f.select :organization_role, [['Organization admin', 'organization_admin'], %w[Member member]], {}, class: 'form-control',  disabled: @user == current_user %><br>
+        <br>
+      </div>
+
+      <div class="actions">
+        <%= f.submit 'Confirm changes', class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', organizations_path, class: 'btn btn-secondary' %>
+      </div>
+  <% end %>
+</div>

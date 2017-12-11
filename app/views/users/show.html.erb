@@ -10,20 +10,10 @@
   E-mail: <%= @user.email %><br>
   Phone number: <%= @user.phone_number %><br>
   <br>
-  <% if @user.organizations.length == 0 %>
-    User belongs to no organizations<br>
-  <% else %>
-      Organizations:<br>
-      <ul class="list-group">
-        <% @user.organizations.each do |organization| %>
-            <li class="list-group-item">
-              <%= organization.name %>
-            </li>
-        <% end %>
-      </ul>
-  <% end %>
+  Role: <%= @user.role %><br>
   <br>
 
-  <%= link_to 'Edit user', edit_user_path , class: 'btn btn-primary'%>
+  <%= link_to 'Edit user', edit_user_path(@user.id), class: 'btn btn-outline-info' %>
+  <%= link_to 'Go back to your organizations', organizations_path, class: 'btn btn-secondary' %>
 
 </div>

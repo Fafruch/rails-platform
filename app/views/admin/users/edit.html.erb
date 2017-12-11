@@ -1,0 +1,48 @@
+<%= render 'shared/error_messages', object: @user %>
+
+<div class="container">
+  <h2>Edit user</h2>
+
+  <%= form_for(@user) do |f| %>
+      <div class="field">
+        <%= f.label 'First name' %><br>
+        <%= f.text_field :first_name, class: 'form-control' %><br>
+        <%= f.label 'Last name' %><br>
+        <%= f.text_field :last_name, class: 'form-control' %><br>
+        <%= f.label 'E-mail' %><br>
+        <%= f.text_field :email, class: 'form-control' %><br>
+        <%= f.label 'Phone number' %><br>
+        <%= f.text_field :phone_number, class: 'form-control' %><br>
+        <%= f.label 'Role' %><br>
+        <%= f.select :role, [['Global admin', 'global_admin'], %w[User user]], {}, class: 'form-control', disabled: @user == current_user %>
+        <br>
+      </div>
+
+      <% if @user.organizations.empty? %>
+          Organizations:<br>
+          <ul class="list-group">
+            <% @user.organizations.each do |user_organization| %>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>
+                  <%= user_organization.name %>
+                </span>
+                  <span>
+                  <%= link_to 'Remove user from this organization', { controller: :user_organizations, action: :destroy, user_id: @user.id, id: user_organization.id }, method: :delete, class: 'btn btn-outline-danger' %>
+                </span>
+                </li>
+            <% end %>
+          </ul>
+      <% end %>
+      <br>
+      <%= link_to 'Add user to organization', { controller: :user_organizations, action: :new, user_id: @user.id }, class: 'btn btn-outline-primary' %>
+      <br>
+      <br>
+      <br>
+
+
+      <div class="actions">
+        <%= f.submit 'Confirm changes', class: 'btn btn-primary' %>
+        <%= link_to 'Go back', admin_user_path(params[:id]), class: 'btn btn-secondary' %>
+      </div>
+  <% end %>
+</div>

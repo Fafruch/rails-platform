@@ -1,0 +1,18 @@
+<%= render 'shared/error_messages', object: @user_organization %>
+
+<div class="container">
+  <h2>Add user to organization</h2>
+
+  <%= form_for @user_organization, url: admin_user_user_organizations_path, html: { method: :post } do |f| %>
+      <div class="field">
+        <%= f.label 'Organization' %><br>
+        <%= f.select :organization_id, @not_user_organizations_hash, {}, class: 'form-control' %><br>
+        <br>
+      </div>
+
+      <div class="actions">
+        <%= f.submit 'Add user to this organization', class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', edit_admin_user_path(@user), class: 'btn btn-secondary' %>
+      </div>
+  <% end %>
+</div>

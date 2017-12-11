@@ -14,10 +14,23 @@ Rails.application.routes.draw do
     get 'sign_up', to: 'devise/registrations#new'
   end
 
+  # Global admin
+  namespace :admin do
+    get '/', to: 'home#index'
+    resources :organizations
+    resources :users, except: :new do
+      resources :user_organizations, path: :organizations
+    end
+  end
+
+  # Org admin
+  resources :organizations, only: %i[index show edit update] do
+    resources :user_organizations, path: :users, only: %i[edit update destroy]
+  end
   resources :users, only: %i[show edit update]
 
   constraints Subdomain do
-    match '', to: 'organizations#show', via: [:get]
+    match '', to: 'organizations#show_on_subdomain', via: [:get]
   end
 
   root to: 'home#index'
