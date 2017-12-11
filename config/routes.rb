@@ -32,7 +32,9 @@ Rails.application.routes.draw do
   # Every user
   resources :users, only: %i[show edit update]
   resources :organizations, only: [] do
-    resources :interests
+    resources :users, only: [] do
+      resources :interests
+    end
   end
 
   constraints Subdomain do

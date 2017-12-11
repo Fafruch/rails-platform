@@ -28,6 +28,12 @@
                               <%= link_to 'Remove user from organization', organization_user_organization_path(organization.id, user.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger ml-3' %>
                             </div>
                           </div>
+
+                          Interests:
+
+                          <% UserOrganization.find_by(organization_id: organization.id, user_id: user.id).interests.each do |interest| %>
+                            <%= interest.name %>,
+                        <% end %>
                         </li>
                     <% end %>
                   </ul>

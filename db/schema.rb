@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211121745) do
+ActiveRecord::Schema.define(version: 20171211153532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,10 +23,10 @@ ActiveRecord::Schema.define(version: 20171211121745) do
 
   create_table "interests", force: :cascade do |t|
     t.bigint "interest_type_id"
-    t.bigint "user_id"
+    t.bigint "user_organization_id"
     t.string "name"
     t.index ["interest_type_id"], name: "index_interests_on_interest_type_id"
-    t.index ["user_id"], name: "index_interests_on_user_id"
+    t.index ["user_organization_id"], name: "index_interests_on_user_organization_id"
   end
 
   create_table "organizations", force: :cascade do |t|
