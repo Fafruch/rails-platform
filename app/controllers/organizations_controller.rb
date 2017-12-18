@@ -5,8 +5,7 @@ class OrganizationsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show_on_subdomain]
 
   def index
-    @organizations = current_user.organizations
-    @user_organizations = current_user.user_organizations
+    @current_user_organizations = current_user.user_organizations
   end
 
   def update
