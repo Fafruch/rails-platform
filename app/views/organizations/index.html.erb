@@ -35,7 +35,11 @@
           <% end %>
 
           <br>
+
           <%= link_to 'Show organization site', organization_path(organization), class: 'btn btn-outline-success' %>
+          <% if user_organization.organization_admin? %>
+              <%= link_to 'Edit organization interest types', organization_interest_types_path(organization), class: 'btn btn-outline-info' %>
+          <% end %>
         </li>
     <% end %>
   </ul>
