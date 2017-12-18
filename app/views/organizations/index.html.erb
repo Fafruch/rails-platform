@@ -34,23 +34,26 @@
                               <% if member.interests.empty? %>
                                   Member has no interests.<br>
                               <% else %>
-                                Interests:
-                                <% member.interests.each do |interest| %>
-                                    <%= interest.name %> (<%= interest.interest_type.name %>),
+                                <strong>Interests:</strong>
+                                <% member.interests.each.with_index do |interest, index| %>
+                                    <%= interest.name %> <i>(<%= interest.interest_type.name %>)</i>
+                                    <% unless index == member.interests.length - 1 %>,<% end %>
                                 <% end %>
                               <% end %>
-                              <br>
-                              <br>
 
                             </div>
                           </div>
+
+                          <br>
 
                             <div class="row">
                               <div class="col-12 d-flex justify-content-end">
                                 <%= link_to 'Show user', user_path(member.user.id), class: 'btn btn-outline-primary' %>
                                 <%= link_to 'Edit member interests', organization_user_interests_path(user_organization.organization.id, member.user.id), class: 'btn btn-outline-info ml-3' %>
-                                <%= link_to 'Edit organization status', edit_organization_user_organization_path(user_organization.organization.id, member.user.id), class: 'btn btn-outline-warning ml-3' %>
-                                <%= link_to 'Remove from organization', organization_user_organization_path(user_organization.organization.id, member.user.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger ml-3' %>
+                                <% unless member.user == current_user %>
+                                  <%= link_to 'Edit organization status', edit_organization_user_organization_path(user_organization.organization.id, member.user.id), class: 'btn btn-outline-warning ml-3' %>
+                                  <%= link_to 'Remove from organization', organization_user_organization_path(user_organization.organization.id, member.user.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger ml-3' %>
+                                <% end %>
                               </div>
                             </div>
                         </li>
@@ -60,8 +63,9 @@
                     <br>
 
                     Organization interest types:
-                    <% user_organization.organization.interest_types.each do |interest_type| %>
-                      <%= interest_type.name %>,
+                    <% user_organization.organization.interest_types.each.with_index do |interest_type, index| %>
+                      <%= interest_type.name %>
+                        <% unless index == user_organization.organization.interest_types.length - 1 %>,<% end %>
                     <% end %>
 
                   </ul>

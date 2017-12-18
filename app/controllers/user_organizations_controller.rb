@@ -12,8 +12,9 @@ class UserOrganizationsController < ApplicationController
   end
 
   def destroy
-    @user_organization.destroy
+    return if @user_organization.user == current_user
 
+    @user_organization.destroy
     redirect_to organizations_path
   end
 
