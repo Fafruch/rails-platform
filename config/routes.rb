@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   # Org admin
   resources :organizations, only: %i[index show edit update] do
     resources :user_organizations, path: :users, only: %i[edit update destroy]
-    resources :interest_types
+    resources :interest_types, only: %i[index new create destroy]
   end
 
   # Every user

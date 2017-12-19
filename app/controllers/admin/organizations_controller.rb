@@ -13,7 +13,7 @@ class Admin::OrganizationsController < Admin::BaseController
   def create
     @organization = Organization.new(organization_params)
     if @organization.save
-      redirect_to action: 'index'
+      redirect_to action: :index
     else
       render :new
     end
@@ -21,7 +21,7 @@ class Admin::OrganizationsController < Admin::BaseController
 
   def update
     if @organization.update_attributes(organization_params)
-      redirect_to action: 'index'
+      redirect_to action: :index
     else
       render :edit
     end

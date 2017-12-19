@@ -6,16 +6,16 @@ class InterestsController < ApplicationController
   def new
     @interest = Interest.new
     @interest_types = Organization.find(params[:organization_id]).interest_types
-    @interest_types_hash = Hash[@interest_types.map { |interest_type| [interest_type.name, interest_type.id] }]
+    @interest_types_for_select = Hash[@interest_types.map { |interest_type| [interest_type.name, interest_type.id] }]
   end
 
   def create
     @interest = Interest.new(interest_params)
     if @interest.save
-      redirect_to action: 'index'
+      redirect_to action: :index
     else
       @interest_types = Organization.find(params[:organization_id]).interest_types
-      @interest_types_hash = Hash[@interest_types.map { |interest_type| [interest_type.name, interest_type.id] }]
+      @interest_types_for_select = Hash[@interest_types.map { |interest_type| [interest_type.name, interest_type.id] }]
       render :new
     end
   end
@@ -29,7 +29,7 @@ class InterestsController < ApplicationController
   private
 
   def authenticate_organization_admin
-    render file: 'public/403.html' unless admin_role_for_organization? || params[:user_id] != current_user.id
+    render file: 'public/403.html' if !admin_role_for_organization? && params[:user_id].to_i != current_user.id
   end
 
   def admin_role_for_organization?

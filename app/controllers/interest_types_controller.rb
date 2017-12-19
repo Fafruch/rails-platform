@@ -1,6 +1,6 @@
 class InterestTypesController < ApplicationController
   before_action :authenticate_organization_admin
-  before_action :find_interest_type, except: %i[new create index]
+  before_action :find_interest_type, only: %i[destroy]
 
   def new
     @interest_type = InterestType.new
@@ -9,7 +9,7 @@ class InterestTypesController < ApplicationController
   def create
     @interest_type = InterestType.new(interest_type_params)
     if @interest_type.save
-      redirect_to action: 'index'
+      redirect_to action: :index
     else
       render :new
     end

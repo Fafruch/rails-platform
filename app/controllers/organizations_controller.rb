@@ -10,7 +10,7 @@ class OrganizationsController < ApplicationController
 
   def update
     if @organization.update_attributes(organization_params)
-      redirect_to action: 'index'
+      redirect_to action: :index
     else
       render :edit
     end
