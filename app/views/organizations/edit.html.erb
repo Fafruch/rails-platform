@@ -12,6 +12,20 @@
         <br>
       </div>
 
+      Organization interest types:
+      <% @organization.interest_types.each.with_index do |interest_type, index| %>
+          <%= interest_type.name %>
+          <% unless index == @organization.interest_types.length - 1 %>,<% end %>
+      <% end %>
+
+      <br>
+      <br>
+
+      <%= link_to 'Edit organization interest types', organization_interest_types_path(@organization), class: 'btn btn-outline-info' %>
+
+      <br>
+      <br>
+
       <div class="actions">
         <%= f.submit 'Confirm changes', class: 'btn btn-primary' %>
         <%= link_to 'Cancel', organizations_path, class: 'btn btn-secondary' %>

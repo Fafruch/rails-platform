@@ -77,7 +77,7 @@
           <%= link_to 'Show organization site', organization_path(user_organization.organization), class: 'btn btn-outline-success' %>
           <%= link_to 'Edit my interests', organization_user_interests_path(user_organization.organization.id, current_user.id), class: 'btn btn-outline-info' %>
           <% if user_organization.organization_admin? %>
-              <%= link_to 'Edit organization interest types', organization_interest_types_path(user_organization.organization), class: 'btn btn-outline-info' %>
+              <%= link_to 'Edit organization', edit_organization_path(user_organization.organization), class: 'btn btn-outline-info' %>
           <% end %>
         </li>
     <% end %>
