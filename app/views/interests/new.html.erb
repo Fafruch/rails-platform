@@ -1,0 +1,20 @@
+<%= render 'shared/error_messages', object: @interest %>
+
+<div class="container">
+  <h2>New interest</h2>
+
+  <%= form_for @interest, url: organization_user_interests_path, html: { method: :post } do |f| %>
+      <div class="field">
+        <%= f.label 'Name' %><br>
+        <%= f.text_field :name, class: 'form-control' %><br>
+      </div>
+
+      <%= f.label 'Interest type' %><br>
+      <%= f.select :interest_type_id, @interest_types_for_select, {}, class: 'form-control' %><br>
+
+      <div class="actions">
+        <%= f.submit 'Create', class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', organization_user_interests_path, class: 'btn btn-secondary' %>
+      </div>
+  <% end %>
+</div>

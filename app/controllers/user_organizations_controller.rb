@@ -12,8 +12,9 @@ class UserOrganizationsController < ApplicationController
   end
 
   def destroy
-    @user_organization.destroy
+    return if @user_organization.user == current_user
 
+    @user_organization.destroy
     redirect_to organizations_path
   end
 
@@ -25,7 +26,7 @@ class UserOrganizationsController < ApplicationController
   end
 
   def admin_role_for_organization?
-    current_user.user_organizations.exists?(organization_role: 'organization_admin', organization_id: params[:id])
+    current_user.user_organizations.exists?(organization_role: 'organization_admin', organization_id: params[:organization_id])
   end
 
   def user_organization_params

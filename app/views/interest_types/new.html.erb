@@ -1,0 +1,17 @@
+<%= render 'shared/error_messages', object: @interest_type %>
+
+<div class="container">
+  <h2>New interest type</h2>
+
+  <%= form_for @interest_type, url: organization_interest_types_path, html: { method: :post } do |f| %>
+      <div class="field">
+        <%= f.label 'Name' %><br>
+        <%= f.text_field :name, class: 'form-control' %><br>
+      </div>
+
+      <div class="actions">
+        <%= f.submit 'Create', class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', organization_interest_types_path, class: 'btn btn-secondary' %>
+      </div>
+  <% end %>
+</div>

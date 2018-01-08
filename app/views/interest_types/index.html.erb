@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Organization interest types</h2>
+  <ul class="list-group">
+    <% if @interest_types.empty? %>
+        This organization has no interest types. Add one.<br>
+    <% else %>
+        <% @interest_types.each_with_index do |interest_type, index| %>
+            <li class="list-group-item row">
+
+              <div class="row">
+                <div class="col-2 d-flex align-items-center">
+                  <%= index + 1 %>.  <%= interest_type.name %>
+                </div>
+
+                <div class="col-10 d-flex justify-content-end">
+                  <%= link_to 'Remove', organization_interest_type_path(@organization.id, interest_type.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger ml-3' %>
+                </div>
+              </div>
+
+            </li>
+        <% end %>
+    <% end %>
+
+    <br />
+    <%= link_to 'Add new interest type', new_organization_interest_type_path, class: 'btn btn-outline-success' %>
+  </ul>
+  <br>
+
+  <%= link_to 'Go back to organization edit', edit_organization_path(@organization), class: 'btn btn-secondary' %>
+
+</div>

@@ -26,8 +26,16 @@ Rails.application.routes.draw do
   # Org admin
   resources :organizations, only: %i[index show edit update] do
     resources :user_organizations, path: :users, only: %i[edit update destroy]
+    resources :interest_types, only: %i[index new create destroy]
   end
+
+  # Every user
   resources :users, only: %i[show edit update]
+  resources :organizations, only: [] do
+    resources :users, only: [] do
+      resources :interests
+    end
+  end
 
   constraints Subdomain do
     match '', to: 'organizations#show_on_subdomain', via: [:get]

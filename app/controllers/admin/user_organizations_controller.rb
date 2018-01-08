@@ -4,7 +4,7 @@ class Admin::UserOrganizationsController < Admin::BaseController
   def new
     @user_organization = UserOrganization.new
     @not_user_organizations = Organization.all - @user.organizations
-    @not_user_organizations_hash = Hash[@not_user_organizations.map { |organization| [organization.name, organization.id] }]
+    @not_user_organizations_for_select = Hash[@not_user_organizations.map { |organization| [organization.name, organization.id] }]
   end
 
   def create
