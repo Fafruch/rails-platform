@@ -2,5 +2,6 @@ class InterestType < ApplicationRecord
   belongs_to :organization
   has_many :interests, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name,
+            :organization, presence: true
 end

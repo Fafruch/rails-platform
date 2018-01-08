@@ -5,5 +5,8 @@ class UserOrganization < ApplicationRecord
 
   delegate :first_name, :last_name, to: :user
 
+  validates :user,
+            :organization, presence: true
+
   enum organization_role: %i[organization_admin member]
 end
